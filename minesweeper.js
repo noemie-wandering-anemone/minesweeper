@@ -7,6 +7,22 @@ var board = {
           {row: 2, col: 0, isMine: false, hidden: true}, {row: 2, col: 1, isMine: false, hidden: true}, {row: 2, col: 2, isMine: true, hidden: true}],
 };
 
+function createBoard (sideSize) {
+  //How to input sideSize?
+  board.cells = [];
+  for (var i = 0; i < sideSize; i++) {
+    for (var j = 0; j < sideSize; j++) {
+      board.cells.push({
+        row: i,
+        col: j,
+        isMine: true, // get it random and proportional to nb of cells
+        isMarked:false,
+        hidden: true
+      });
+    };
+  };
+}
+
 function startGame () {
   // Don't remove this function call: it makes the game work!
   lib.initBoard()
@@ -28,13 +44,13 @@ function startGame () {
 function checkForWin () {
   
   for (var i = 0; i < board.cells.length; i++) {
-    if ([i].isMine === true && [i].isMarked === false) {
-      return
-    } else if ([i].isMine === false && [i].hidden === true) {
+    if (board["cells"][i].isMine === true && board["cells"][i].isMarked === false) {
       return;
-    }
+    } else if (board["cells"][i].isMine === false && board["cells"][i].hidden === true) {
+      return;
+    }  
   }
-  return lib.displayMessage('You win!')
+  return lib.displayMessage('You win!');
   // You can use this function call to declare a winner (once you've
   // detected that they've won, that is!)
   //   lib.displayMessage('You win!')
