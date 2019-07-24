@@ -1,14 +1,16 @@
 document.addEventListener('DOMContentLoaded', startGame)
 
 // Define your `board` object here!
-var board = {
+/*var board = {
   cells: [{row: 0, col: 0, isMine: false, hidden: true}, {row: 0, col: 1, isMine: true, hidden: true}, {row: 0, col: 2, isMine: false, hidden: true},
           {row: 1, col: 0, isMine: true, hidden: true}, {row: 1, col: 1, isMine: false, hidden: true}, {row: 1, col: 2, isMine: false, hidden: true},
           {row: 2, col: 0, isMine: false, hidden: true}, {row: 2, col: 1, isMine: false, hidden: true}, {row: 2, col: 2, isMine: true, hidden: true}],
-};
+};*/
+
+//var board = {};
+var board = {cells:[]};
 
 function createBoard (sideSize) {
-  //How to input sideSize?
   board.cells = [];
   for (var i = 0; i < sideSize; i++) {
     for (var j = 0; j < sideSize; j++) {
@@ -21,11 +23,25 @@ function createBoard (sideSize) {
       });
     };
   };
+  return board;
 }
 
 function startGame () {
-  // Don't remove this function call: it makes the game work!
-  lib.initBoard()
+  
+  createBoard(3);
+
+  //Tentative 1
+  //document.getElementById("easy").addEventListener("click", function(){createBoard(3)});
+  //document.getElementById("medium").addEventListener("click", function(){createBoard(5)}); 
+  //document.getElementById("hard").addEventListener("click", function(){createBoard(7)}); 
+  
+  //Tentative 2
+  /*var medium = document.getElementById("medium");
+    medium.addEventListener("click", function(){
+    console.log(createBoard(5)
+  });*/
+
+
   //loop over each cell.
   //Call for countSurroundingMines function.
   //add a new surroundingMines property to each cell with the value retrieved above.
@@ -33,8 +49,13 @@ function startGame () {
     //board["cells"][i].surroundingMines = countSurroundingMines(board["cells"][i]);
   //}
   board.cells.forEach(cell => cell.surroundingMines = countSurroundingMines(cell));
+
+  lib.initBoard()
+  // Don't remove this function call: it makes the game work!
+
   document.addEventListener("click", checkForWin);
   document.addEventListener("contextmenu", checkForWin);
+  
 }
 
 // Define this function to look for a win condition:
@@ -42,11 +63,10 @@ function startGame () {
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
 function checkForWin () {
-  
-  for (var i = 0; i < board.cells.length; i++) {
-    if (board["cells"][i].isMine === true && board["cells"][i].isMarked === false) {
+  for (var  i = 0; i < board.cells.length; i++) {
+    if (board.cells[i].isMine && !board.cells[i].isMarked) {
       return;
-    } else if (board["cells"][i].isMine === false && board["cells"][i].hidden === true) {
+    } else if (!board.cells[i].isMine && board.cells[i].hidden) {
       return;
     }  
   }
