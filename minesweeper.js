@@ -17,7 +17,9 @@ function createBoard(sideSize) {
       board.cells.push({
         row: i,
         col: j,
-        isMine: Math.random() > 0.65, // get it random and proportional to nb of cells
+        isMine: Math.random() > 0.70, // get it random and proportional to nb of cells
+        //add remaining mine counter?
+        //Cap max number of mines?
         isMarked: false,
         hidden: true
       });
@@ -37,11 +39,15 @@ function onLoad() {
   document.getElementById("hard").addEventListener("click", function() {
     startGame(6);
   });
+  //Add custom option with input field
+  //listen to click on ok
+  //define var num = input content
+  //startGame(num)
 }
 
 function startGame(size) {
   const boardNode = document.getElementsByClassName("board")[0];
-  boardNode.innerHTML = "";
+  boardNode.innerHTML = ""; //Clear existing board
   createBoard(size);
 
   //loop over each cell.
@@ -61,18 +67,6 @@ function startGame(size) {
   document.addEventListener("contextmenu", checkForWin);
   document.getElementById("reset").addEventListener("click", resetBoard);
 }
-
-//Tentative 1
-//var easy = document.getElementById("easy");
-//easy.addEventListener("click", createBoard(3));
-
-//document.getElementById("medium").addEventListener("click", createBoard(5));
-//document.getElementById("hard").addEventListener("click", createBoard(6));
-//Add custom option with input field
-
-//Tentative 2
-
-//add custom option for player to decide the size of the board.
 
 // Define this function to look for a win condition:
 //
@@ -96,11 +90,8 @@ function checkForWin() {
 }
 
 function resetBoard() {
-  //console.log("test");
-  //var sideSize = Math.sqrt(board["cells"].length);
-  //console.log(sideSize);
-  //createBoard(sideSize);
-  //or reset hidden and isMarked to origin and randomize isMine
+  var sideSize = Math.sqrt(board["cells"].length);
+  startGame(sideSize);
 }
 
 // Define this function to count the number of mines around the cell
@@ -116,16 +107,20 @@ function countSurroundingMines(cell) {
   //On surrounding cells array, filter to only keep cell.isMine: true.
   //return array length to get the number of mines.
   var surrounding = lib.getSurroundingCells(cell.row, cell.col);
-  var mines = 0;
-  for (var i = 0; i < surrounding.length; i++) {
-    if (surrounding[i].isMine === true) {
-      mines++;
+  var mines = surrounding.reduce(function(minesCount, cell) {
+    console.log(minesCount, cell);
+    if (cell.isMine === true) {
+      return ++minesCount;
     }
-  }
+    return minesCount;
+  }, 0);
+  //for (var i = 0; i < surrounding.length; i++) {
+  //  if (surrounding[i].isMine === true) {
+  //    mines++;
+  //  }
+  //}
+
   return mines;
 
   //is it possible to map the surrounding array, reduce it to an array with only
 }
-
-//add remaining mine counter?
-//Cap max number of mines?
