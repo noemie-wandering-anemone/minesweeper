@@ -1,6 +1,9 @@
-html, body {
+html,
+body {
   height: 100%;
-  font-family: 'Open Sans', sans-serif
+  font-family: "Open Sans", sans-serif;
+  background-image: url("images/background.JPG");
+  background-size: cover;
 }
 
 body {
@@ -10,14 +13,46 @@ body {
   flex-direction: column;
 }
 
-#message, #notes {
+#message,
+#notes {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-weight: bolder;
+  margin-top: 1em;
+  border-radius: 50% 60% 60% 50%;
+  box-shadow: 0 0 2em 2em rgb(221, 175, 132, 0.6);
 }
 
 #message {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
+  color: rgb(92, 37, 5);
+  background-color: rgb(221, 175, 132, 0.6);
+  padding: 0 2em;
+}
+
+#difficulty {
+  margin-bottom: 2em;
+}
+
+#reset {
+  margin-top: 2em;
+}
+
+#difficulty button,
+#reset button {
+  background: rgb(92, 37, 5);
+  color: rgba(224, 181, 141);
+  padding: 1.5em;
+  border: none;
+  border-radius: 50%;
+  margin: 0.5em;
+  font-size: 1em;
+}
+
+#difficulty button:hover,
+#reset button:hover {
+  font-weight: bold;
 }
 
 .board {
@@ -26,13 +61,14 @@ body {
 }
 
 .board div {
-  color: green;
+  color: rgb(92, 37, 5);
   font-size: 2rem;
+  font-weight: bolder;
   width: 75px;
   height: 75px;
   border: 1px #ccc dotted;
   border-radius: 10%;
-  background-color: white;
+  background-color: rgb(221, 175, 132, 0.3);
   margin: 3px;
   display: flex;
   align-items: center;
@@ -40,21 +76,23 @@ body {
 }
 
 .board div:hover {
-  background-color: white;
+  background-color: rgba(224, 181, 141, 0.8);
 }
 
-div.mine, div.mine:hover {
-  background: no-repeat center/60% url("images/bomb.svg") crimson;
+div.mine,
+div.mine:hover {
+  background: no-repeat center/100% url("images/blob.JPG");
 }
 
 div.hidden {
-  background: #eee;
+  background: rgba(224, 181, 141, 0.8);
 }
 
 div.hidden:hover {
-  background: #ccc;
+  background: rgb(221, 175, 132, 0.7);
 }
 
-div.marked, div.marked:hover {
-  background: no-repeat center/60% url("images/mark.svg") deepskyblue;
+div.marked,
+div.marked:hover {
+  background: no-repeat center/100% url("images/anemone.jpeg");
 }

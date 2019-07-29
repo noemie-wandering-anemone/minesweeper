@@ -1,13 +1,5 @@
 document.addEventListener("DOMContentLoaded", onLoad);
 
-// Define your `board` object here!
-/*var board = {
-  cells: [{row: 0, col: 0, isMine: false, hidden: true}, {row: 0, col: 1, isMine: true, hidden: true}, {row: 0, col: 2, isMine: false, hidden: true},
-          {row: 1, col: 0, isMine: true, hidden: true}, {row: 1, col: 1, isMine: false, hidden: true}, {row: 1, col: 2, isMine: false, hidden: true},
-          {row: 2, col: 0, isMine: false, hidden: true}, {row: 2, col: 1, isMine: false, hidden: true}, {row: 2, col: 2, isMine: true, hidden: true}],
-};*/
-
-//var board = {};
 var board = { cells: [] };
 
 function createBoard(sideSize) {
@@ -39,7 +31,7 @@ function onLoad() {
   document.getElementById("hard").addEventListener("click", function() {
     startGame(6);
   });
-  //Add custom option with input field
+  //Add custom option with input field:
   //listen to click on ok
   //define var num = input content
   //startGame(num)
@@ -83,7 +75,7 @@ function checkForWin() {
     }
   }
   playSound("won");
-  return lib.displayMessage("You win!");
+  return lib.displayMessage("Beautiful!");
 }
 
 function resetBoard() {
@@ -101,6 +93,7 @@ function countSurroundingMines(cell) {
       mines++;
     }
   }
+  //Other method:
   //var mines = surrounding.reduce(function(minesCount, cell) {
   //  console.log(minesCount, cell);
   //  if (cell.isMine === true) {
@@ -116,3 +109,10 @@ function playSound(sound) {
   var audio = document.getElementById(sound);
   audio.play();
 }
+
+// Define your `board` object here!
+/*var board = {
+  cells: [{row: 0, col: 0, isMine: false, hidden: true}, {row: 0, col: 1, isMine: true, hidden: true}, {row: 0, col: 2, isMine: false, hidden: true},
+          {row: 1, col: 0, isMine: true, hidden: true}, {row: 1, col: 1, isMine: false, hidden: true}, {row: 1, col: 2, isMine: false, hidden: true},
+          {row: 2, col: 0, isMine: false, hidden: true}, {row: 2, col: 1, isMine: false, hidden: true}, {row: 2, col: 2, isMine: true, hidden: true}],
+};*/
