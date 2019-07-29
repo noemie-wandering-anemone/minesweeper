@@ -17,7 +17,7 @@ function createBoard(sideSize) {
       board.cells.push({
         row: i,
         col: j,
-        isMine: Math.random() > 0.70, // get it random and proportional to nb of cells
+        isMine: Math.random() > 0.7, // get it random and proportional to nb of cells
         //add remaining mine counter?
         //Cap max number of mines?
         isMarked: false,
@@ -69,7 +69,6 @@ function startGame(size) {
 }
 
 // Define this function to look for a win condition:
-//
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
 function checkForWin() {
@@ -83,10 +82,8 @@ function checkForWin() {
       return;
     }
   }
+  playSound("won");
   return lib.displayMessage("You win!");
-  // You can use this function call to declare a winner (once you've
-  // detected that they've won, that is!)
-  //   lib.displayMessage('You win!')
 }
 
 function resetBoard() {
@@ -94,33 +91,28 @@ function resetBoard() {
   startGame(sideSize);
 }
 
-// Define this function to count the number of mines around the cell
-// (there could be as many as 8). You don't have to get the surrounding
-// cells yourself! Just use `lib.getSurroundingCells`:
-//
-//   var surrounding = lib.getSurroundingCells(cell.row, cell.col)
-//
-// It will return cell objects in an array. You should loop through
-// them, counting the number of times `cell.isMine` is true.
 function countSurroundingMines(cell) {
   //For one cell, find surrounding cells, return the list of them in an array (getSurroundingCells)
-  //On surrounding cells array, filter to only keep cell.isMine: true.
-  //return array length to get the number of mines.
+  //reduce surrounding array to an array with only isMine==true and return its length
   var surrounding = lib.getSurroundingCells(cell.row, cell.col);
-  var mines = surrounding.reduce(function(minesCount, cell) {
-    console.log(minesCount, cell);
-    if (cell.isMine === true) {
-      return ++minesCount;
+  var mines = 0;
+  for (var i = 0; i < surrounding.length; i++) {
+    if (surrounding[i].isMine === true) {
+      mines++;
     }
-    return minesCount;
-  }, 0);
-  //for (var i = 0; i < surrounding.length; i++) {
-  //  if (surrounding[i].isMine === true) {
-  //    mines++;
+  }
+  //var mines = surrounding.reduce(function(minesCount, cell) {
+  //  console.log(minesCount, cell);
+  //  if (cell.isMine === true) {
+  //    return ++minesCount;
   //  }
-  //}
+  //  return minesCount;
+  //}, 0);
 
   return mines;
+}
 
-  //is it possible to map the surrounding array, reduce it to an array with only
+function playSound(sound) {
+  var audio = document.getElementById(sound);
+  audio.play();
 }
